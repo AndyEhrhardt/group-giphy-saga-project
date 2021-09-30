@@ -5,6 +5,8 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import Favorite from '../Favorite/Favorite';
 import Search from '../Search/Search';
 
+
+
 function App(props) {
   const dispatch = useDispatch();
   const reduxState = useSelector(reduxState => reduxState)
