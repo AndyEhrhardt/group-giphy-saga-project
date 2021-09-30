@@ -5,7 +5,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import Favorite from '../Favorite/Favorite';
 import Search from '../Search/Search';
 
-
+import './style.css'
 
 function App(props) {
   const dispatch = useDispatch();

@@ -25,7 +25,7 @@ function Search(){
         <input placeholder="Search" type='text' value={newSearch} onChange={(event) => setNewSearch(event.target.value)} />
         <input type='submit' value='Submit New Search' />
         </form>
-        <div>
+        <div className="images-wrapper">
         {results.map((gif) => (
             <SearchItem key={gif.images.original.url} image={gif.images.original.url}/>
          ))}
