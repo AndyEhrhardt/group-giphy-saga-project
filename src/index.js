@@ -20,6 +20,16 @@ function* getFavorites(){
 
 
 //POST saga function
+function* createGiphy(action) {
+    try {
+        console.log('saga createGiphy wired!');
+        console.log(action.payload);
+        yield axios.post('/api/giphy', action.payload) 
+        yield put({ type: 'GET_FAVORITES'})   
+    } catch(error) {
+        console.log(error);  
+    }
+}
 
 
 
@@ -33,6 +43,10 @@ function* watcherSaga() {
     //GET_FAVORITES takeEvery
     yield takeEvery('GET_FAVORITES', getFavorites);
     //ADD_FAVORITES takeEvery
+
+    // CREATE_GIPHY takeEvery
+    yield takeEvery('CREATE_GIPHY', createGiphy);
+
 
     
 
