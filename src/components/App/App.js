@@ -9,6 +9,9 @@ function App(props) {
   const dispatch = useDispatch();
   const reduxState = useSelector(reduxState => reduxState)
 
+  const [newGiphy, setNewGiphy] = useState('');
+  
+
   //On page load get favorites
   useEffect(() => {
     getFavorites();
@@ -19,6 +22,13 @@ function App(props) {
     dispatch({ type: 'GET_FAVORITES' })
   }
 
+
+  // POSTs data to DB
+  const handleClick = () => {
+    dispatch({type: 'CREATE_GIPHY', payload: newGiphy})
+    setNewGiphy('');
+  }
+  
   return (
     <div>
       <h1>Giphy Search!</h1>
