@@ -11,11 +11,15 @@ import axios from 'axios';
 
 //GET saga function
 function* getFavorites(){
-    //try{
-    yield console.log('Sagas are workin')
-    //}catch(err){
-
-    //}
+    try{
+        console.log('Sagas are workin');
+        const favoritesResponse = yield axios.get('/api/favorite');
+        console.log(favoritesResponse.data);
+        const favActionForReducer = { type: 'SET_FAVORITES', payload: favoritesResponse.data};
+        yield put (favActionForReducer);
+    }catch(err){
+        console.log('ERROR'. err);
+    }
 }
 
 
@@ -25,7 +29,14 @@ function* getFavorites(){
 
 // favoriteGiphy reducer
 const favoriteGiphyReducer = (state = [], action) => {
-    return state;
+    switch (action.type) {
+        case 'ADD_FAVORITES':
+            return [...state, action.payload]
+        case 'SET_FAVORITES':
+            return action.payload
+        default:
+            return state;
+    }
 }
 
 //Watcher Saga
