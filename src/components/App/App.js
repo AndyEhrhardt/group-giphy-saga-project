@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 function App(props) {
   const dispatch = useDispatch();
