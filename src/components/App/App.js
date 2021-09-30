@@ -3,6 +3,10 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashRouter as Router, Route } from 'react-router-dom';
 
+import Search from '../Search/Search'
+
+
+
 function App(props) {
   const dispatch = useDispatch();
   const reduxState = useSelector(reduxState => reduxState)
@@ -23,8 +27,9 @@ function App(props) {
     <div>
       <h1>Giphy Search!</h1>
       {/* routes go here */}
-      {/*  GET axios request for search*/}
-
+      
+      
+      <Search/>
     </div>
   );
 }
