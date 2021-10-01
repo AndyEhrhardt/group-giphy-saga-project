@@ -1,0 +1,13 @@
+.images-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+    border: solid gray 2px;
+}
