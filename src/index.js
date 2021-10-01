@@ -28,7 +28,31 @@ function* createGiphy(action) {
     try {
         console.log('saga createGiphy wired!');
         console.log(action.payload);
-        yield axios.post('/api/giphy', action.payload) 
+        yield axios.post('/api/favorite', {url: action.payload}) 
+        yield put({ type: 'GET_FAVORITES'})   
+    } catch(error) {
+        console.log(error);  
+    }
+}
+
+// sort by function 
+function* sortBy(action) {
+    try {
+        console.log('saga createGiphy wired!');
+        console.log(action.payload);
+        yield axios.post('/api/favorite', action.payload) 
+        yield put({ type: 'GET_FAVORITES'})   
+    } catch(error) {
+        console.log(error);  
+    }
+}
+
+// add category
+function* addCategory(action) {
+    try {
+        console.log('saga createGiphy wired!');
+        console.log(action.payload);
+        yield axios.put(`/api/favorite/${action.payload}`, {catId: action.catId}) 
         yield put({ type: 'GET_FAVORITES'})   
     } catch(error) {
         console.log(error);  
@@ -36,10 +60,34 @@ function* createGiphy(action) {
 }
 
 
-
 // favoriteGiphy reducer
 const favoriteGiphyReducer = (state = [], action) => {
     switch (action.type) {
+        case 'ADD_FAVORITES':
+            return [...state, action.payload]
+        case 'SET_FAVORITES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+
+// categories reducer
+const giphyCategoryReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'ADD_CATEGORY':
+            return [...state, action.payload]
+        case 'SET_CATEGORY':
+            return action.payload
+        default:
+            return state;
+    } 
+}
+
+// sortBy reducer
+const sortByReducer = (state = [], action ) => {
+    switch(action.type) {
         case 'ADD_FAVORITES':
             return [...state, action.payload]
         case 'SET_FAVORITES':
@@ -54,13 +102,11 @@ function* watcherSaga() {
     //GET_FAVORITES takeEvery
     yield takeEvery('GET_FAVORITES', getFavorites);
     //ADD_FAVORITES takeEvery
-
-    // CREATE_GIPHY takeEvery
     yield takeEvery('CREATE_GIPHY', createGiphy);
-
-
     
+    yield takeEvery('ADD_CATEGORY', addCategory);
 
+    yield takeEvery('SORT_BY', sortBy);
 
 }
 
@@ -75,6 +121,8 @@ const storeInstance = createStore(
     combineReducers({
         //reducers go here
         favoriteGiphyReducer,
+        giphyCategoryReducer
+
     }),
     applyMiddleware(sagaMiddleware, logger),
 );
