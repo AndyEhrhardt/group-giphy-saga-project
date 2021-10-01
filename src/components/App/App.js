@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route, Link } from 'react-router-dom';
 import Favorite from '../Favorite/Favorite';
 import Search from '../Search/Search';
 
@@ -30,12 +30,22 @@ function App(props) {
     dispatch({type: 'CREATE_GIPHY', payload: newGiphy})
     setNewGiphy('');
   }
+
+//const goToFavorites = 
   
   return (
     <div>
       <h1>Giphy Search!</h1>
       {/* routes go here */}
       <Router>
+      <ul>
+    <li>
+      <Link to="/favorite">Favorites</Link>
+    </li>
+    <li> 
+      <Link to="/">Home</Link>
+    </li>
+    </ul>
         <Route path="/" exact>
           <Search />
         </Route>
@@ -43,6 +53,7 @@ function App(props) {
           <Favorite />
         </Route>
       </Router>
+      {/*<button onClick={goToFavorites}>Go To Favorites</button>*/}
       </div>
       );
   }
